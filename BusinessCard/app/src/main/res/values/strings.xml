@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BusinessCard</string>
+    <string name="full_name">Alexander Ferreira</string>
+    <string name="job_title">Android Developer</string>
+    <string name="phone">(99) 99999–9999</string>
+    <string name="email">example@email.com</string>
+    <string name="address">Rua dos Eucaliptos, 999</string>
+</resources>
