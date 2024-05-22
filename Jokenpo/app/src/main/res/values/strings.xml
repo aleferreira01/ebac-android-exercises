@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Jokenpô</string>
+    <string name="main_text">Bem vindo ao Jokenpô</string>
+    <string name="start">Iniciar</string>
+</resources>
