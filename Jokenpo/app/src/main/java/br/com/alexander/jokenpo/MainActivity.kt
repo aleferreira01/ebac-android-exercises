@@ -1,10 +1,8 @@
 package br.com.alexander.jokenpo
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import br.com.alexander.jokenpo.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -12,9 +10,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
+        val toolbar = binding.toolbar
 
         setContentView(binding.root)
+        setSupportActionBar(toolbar)
 
+        supportActionBar?.title = ""
+
+        val playerIntent = Intent(this, PlayerActivity::class.java)
+
+        binding.startButton.setOnClickListener {
+            startActivity(playerIntent)
+        }
 
     }
+
+
 }

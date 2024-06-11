@@ -2,4 +2,16 @@
     <string name="app_name">Jokenpô</string>
     <string name="main_text">Bem vindo ao Jokenpô</string>
     <string name="start">Iniciar</string>
+    <string name="restart_game">Reiniciar jogo</string>
+    <string name="player_1">Jogador 1</string>
+    <string name="result">Resultado</string>
+    <string name="select_move">Selecione jogada</string>
+    <string name="rock">Pedra</string>
+    <string name="paper">Papel</string>
+    <string name="scissors">Tesoura</string>
+    <string-array name="moves_array">
+        <item name="rock">Pedra</item>
+        <item name="paper">Papel</item>
+        <item name="scissors">Tesoura</item>
+    </string-array>
 </resources>
