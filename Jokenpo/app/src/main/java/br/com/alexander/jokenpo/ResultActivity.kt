@@ -27,7 +27,7 @@ class ResultActivity : AppCompatActivity() {
         bottomNav = binding.bottomLayout.bottomNav
         bottomNav.menu.findItem(R.id.bottom_result).isEnabled = false
 
-        mainActivityIntent = Intent(this, MainActivity::class.java)
+        mainActivityIntent = Intent(this, HomeFragment::class.java)
         mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
         setContentView(drawer)
