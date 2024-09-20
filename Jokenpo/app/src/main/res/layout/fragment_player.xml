@@ -42,6 +42,7 @@
         app:layout_constraintEnd_toEndOf="@id/select_move"
         app:layout_constraintStart_toStartOf="@id/select_move"
         app:layout_constraintTop_toBottomOf="@id/select_move"
+        android:entries="@array/moves_array"
         tools:entries="@array/moves_array"
         tools:item="@android:layout/simple_spinner_item"
         tools:listitem="@android:layout/simple_spinner_dropdown_item" />

@@ -4,6 +4,7 @@
     <string name="start">Iniciar</string>
     <string name="restart_game">Reiniciar jogo</string>
     <string name="player_1">Jogador 1</string>
+    <string name="player">Jogador</string>
     <string name="result">Resultado</string>
     <string name="select_move">Selecione jogada</string>
     <string name="rock">Pedra</string>
