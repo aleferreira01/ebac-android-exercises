@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
-import br.com.alexander.jokenpo.databinding.FragmentPlayerBinding
+import br.com.alexander.jokenpo.databinding.FragmentResultBinding
 
-class PlayerFragment : Fragment() {
+class ResultFragment : Fragment() {
 
     private lateinit var root: View
 
@@ -21,7 +21,7 @@ class PlayerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentPlayerBinding.inflate(inflater, container, false)
+        val binding = FragmentResultBinding.inflate(inflater, container, false)
         root = binding.root
 
         setHasOptionsMenu(true)
@@ -36,5 +36,4 @@ class PlayerFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return item.onNavDestinationSelected(findNavController())
     }
-
 }
