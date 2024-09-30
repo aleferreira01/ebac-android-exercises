@@ -17,6 +17,8 @@ class HomeFragment : Fragment() {
     ): View {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        lifecycle.addObserver(CustomObserver())
+
         binding.startButton.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToGameNav()
             findNavController().navigate(action)

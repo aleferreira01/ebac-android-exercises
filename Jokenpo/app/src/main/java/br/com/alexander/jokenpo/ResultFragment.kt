@@ -26,6 +26,8 @@ class ResultFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+        lifecycle.addObserver(CustomObserver())
+
         return root
     }
 
