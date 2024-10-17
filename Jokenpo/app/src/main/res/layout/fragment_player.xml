@@ -37,7 +37,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:entries="@array/moves_array"
         android:saveEnabled="false"
         android:theme="@style/Theme.Material3.DayNight"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,6 +46,7 @@
         tools:entries="@array/moves_array"
         tools:item="@android:layout/simple_spinner_item"
         tools:listitem="@android:layout/simple_spinner_dropdown_item" />
+<!--        android:entries="@array/moves_array"-->
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
