@@ -1,26 +1,32 @@
 package br.com.alexander.jokenpo
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import br.com.alexander.jokenpo.databinding.FragmentPlayerBinding
 
-class PlayerFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class PlayerFragment : Fragment() {
 
     private lateinit var root: View
     private lateinit var spinner: Spinner
+    private lateinit var onItemSelectedListener: OnItemSelectedListener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        onItemSelectedListener = context as OnItemSelectedListener
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,20 +71,7 @@ class PlayerFragment : Fragment(), AdapterView.OnItemSelectedListener {
             android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
-        spinner.onItemSelectedListener = this
+        spinner.onItemSelectedListener = onItemSelectedListener
     }
-
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-        val plays = resources.getStringArray(R.array.moves_array)
-        val selectedPlay = plays[position]
-
-        Toast.makeText(
-            requireContext(),
-            getString(R.string.selected_play, selectedPlay),
-            Toast.LENGTH_SHORT)
-            .show()
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {}
 
 }

@@ -11,6 +11,9 @@
     <string name="paper">Papel</string>
     <string name="scissors">Tesoura</string>
     <string name="selected_play">Jogada selecionada: %1$s</string>
+    <string name="you_won">Você ganhou</string>
+    <string name="you_lost">Você perdeu</string>
+    <string name="you_tied">Você empatou</string>
     <string-array name="moves_array">
         <item name="rock">Pedra</item>
         <item name="paper">Papel</item>
