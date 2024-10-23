@@ -8,32 +8,88 @@
     tools:context=".ResultFragment"
     tools:openDrawer="start">
 
-        <TextView
-            android:id="@+id/result_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/result"
-            android:textSize="32sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline2" />
+    <TextView
+        android:id="@+id/result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/result"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline2" />
 
-        <TextView
-            android:id="@+id/player_winner_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="O jogador xxx ganhou"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/result_text"
-            app:layout_constraintStart_toStartOf="@id/result_text"
-            app:layout_constraintTop_toBottomOf="@id/result_text" />
+    <TextView
+        android:id="@+id/player_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/ai_text"
+        app:layout_constraintEnd_toStartOf="@id/player_play_text"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/result_text"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold"
+        android:text="@string/player" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.25" />
+    <TextView
+        android:id="@+id/player_play_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/player_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/player_text"
+        app:layout_constraintTop_toTopOf="@id/player_text"
+        tools:text="Papel" />
+
+    <TextView
+        android:id="@+id/ai_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/player_text"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@id/player_text"
+        app:layout_constraintTop_toBottomOf="@id/player_text"
+        app:layout_constraintBottom_toTopOf="@id/winner_text"
+        android:text="@string/ai" />
+
+    <TextView
+        android:id="@+id/ai_play_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@id/ai_text"
+        app:layout_constraintEnd_toEndOf="@id/player_play_text"
+        app:layout_constraintStart_toStartOf="@+id/player_play_text"
+        app:layout_constraintTop_toTopOf="@id/ai_text"
+        tools:text="Tesoura" />
+
+    <TextView
+        android:id="@+id/winner_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/ai_play_text"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/ai_text"
+        app:layout_constraintTop_toBottomOf="@+id/ai_text"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginTop="32dp"
+        tools:text="O jogador xxx ganhou" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

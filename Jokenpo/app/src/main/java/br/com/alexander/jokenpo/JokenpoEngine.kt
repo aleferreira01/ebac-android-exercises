@@ -8,6 +8,8 @@ enum class Result {
 
 class JokenpoEngine(private val availablePlays: Array<String>) {
 
+    private var aiPlay: String = "Pedra"
+
     fun calculateResult(playerPlay: String): Result {
         val aiPlay = getAIPlay()
 
@@ -24,6 +26,9 @@ class JokenpoEngine(private val availablePlays: Array<String>) {
 
     private fun getAIPlay(): String {
         val playIndex = Random.nextInt(0, 3)
-        return availablePlays[playIndex]
+        aiPlay = availablePlays[playIndex]
+        return aiPlay
     }
+
+    fun getAIPlayStr() = aiPlay
 }

@@ -14,6 +14,7 @@
     <string name="you_won">Você ganhou</string>
     <string name="you_lost">Você perdeu</string>
     <string name="you_tied">Você empatou</string>
+    <string name="ai">Sistema:</string>
     <string-array name="moves_array">
         <item name="rock">Pedra</item>
         <item name="paper">Papel</item>

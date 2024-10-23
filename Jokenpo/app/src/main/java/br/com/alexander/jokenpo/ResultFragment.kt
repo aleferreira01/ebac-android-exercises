@@ -17,6 +17,8 @@ class ResultFragment : Fragment() {
 
     private lateinit var root: View
     private lateinit var engine: JokenpoEngine
+    private lateinit var playerPlayText: TextView
+    private lateinit var aiPlayText: TextView
     private lateinit var resultText: TextView
 
     override fun onCreateView(
@@ -30,7 +32,10 @@ class ResultFragment : Fragment() {
         engine = JokenpoEngine(resources.getStringArray(R.array.moves_array))
 
         val currentPlay = arguments?.getString("currentPlay")
-        resultText = binding.playerWinnerText
+
+        playerPlayText = binding.playerPlayText
+        aiPlayText = binding.aiPlayText
+        resultText = binding.winnerText
 
         currentPlay?.let {
             updateResultText(currentPlay)
@@ -45,6 +50,9 @@ class ResultFragment : Fragment() {
 
     private fun updateResultText(currentPlay: String) {
         val resultGame = engine.calculateResult(currentPlay)
+
+        playerPlayText.text = currentPlay
+        aiPlayText.text = engine.getAIPlayStr()
 
         resultText.text = when(resultGame) {
             Result.WIN -> getString(R.string.you_won)
