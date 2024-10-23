@@ -1,13 +1,15 @@
 package br.com.alexander.jokenpo
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -18,6 +20,13 @@ class PlayerFragment : Fragment() {
 
     private lateinit var root: View
     private lateinit var spinner: Spinner
+    private lateinit var onItemSelectedListener: OnItemSelectedListener
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        onItemSelectedListener = context as OnItemSelectedListener
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +45,7 @@ class PlayerFragment : Fragment() {
         setHasOptionsMenu(true)
 
         lifecycle.addObserver(CustomObserver())
+        setupSelectPlaySpinner()
 
         return root
     }
@@ -52,6 +62,16 @@ class PlayerFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return item.onNavDestinationSelected(findNavController())
+    }
+
+    private fun setupSelectPlaySpinner() {
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.moves_array,
+            android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = onItemSelectedListener
     }
 
 }

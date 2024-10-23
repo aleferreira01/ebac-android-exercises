@@ -2,6 +2,8 @@ package br.com.alexander.jokenpo
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -14,13 +16,14 @@ import br.com.alexander.jokenpo.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var drawer: DrawerLayout
     private lateinit var navDrawer: NavigationView
     private lateinit var bottomNav: BottomNavigationView
+    private var currentPlay: String = "Pedra"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,12 +55,47 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navDrawer.setupWithNavController(navController)
         bottomNav.setupWithNavController(navController)
+        bottomNav.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.resultFragment -> {
+                    val args = Bundle()
+                    args.putString("currentPlay", currentPlay)
+                    navController.navigate(it.itemId, args)
+                }
+                else -> navController.navigate(it.itemId)
+            }
+            true
+        }
+        navDrawer.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.resultFragment -> {
+                    val args = Bundle()
+                    args.putString("currentPlay", currentPlay)
+                    navController.navigate(it.itemId, args)
+                }
+                else -> navController.navigate(it.itemId)
+            }
+            true
+        }
 
     }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+        val availablePlays = resources.getStringArray(R.array.moves_array)
+        currentPlay = availablePlays[position]
+
+        Toast.makeText(
+            this,
+            getString(R.string.selected_play, currentPlay),
+            Toast.LENGTH_SHORT)
+            .show()
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {}
 
 
 }
