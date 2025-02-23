@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AwesomeMovieApp</string>
+    <string name="see_more">Ver mais</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie_categories_example">Action • Superhero • Thriller</string>
+    <string name="rating_example">★ 7.0 (IMDb)</string>
+    <string name="movie_desc_example">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus urna erat, ut laoreet metus vehicula malesuada. Fusce purus sapien, congue id tincidunt vel, porta quis erat. Aenean sagittis leo orci, quis sollicitudin sapien porta vel. Proin congue nisi eu diam suscipit, eget malesuada sem feugiat. Mauris urna erat, posuere interdum odio sed, feugiat vulputate orci. In a ligula orci. In mollis nibh vitae dictum lacinia. Sed in lectus eu erat efficitur cursus. Pellentesque in felis eu nunc mattis rhoncus id nec lorem. Nam sapien lacus, suscipit sit amet diam sit amet, lobortis aliquet elit. Morbi laoreet condimentum molestie. Mauris molestie bibendum finibus. Mauris a nibh at velit malesuada blandit. Nunc arcu urna, tincidunt nec libero bibendum, lacinia venenatis massa.</string>
+    <string name="posters">Posters</string>
+    <string name="movie_title_example">Batman</string>
+    <string name="temp_title_movie">Item %1$s - %2$s</string>
+    <string name="search">Search</string>
+</resources>
