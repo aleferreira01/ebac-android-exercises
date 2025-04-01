@@ -10,4 +10,5 @@
     <string name="movie_title_example">Batman</string>
     <string name="temp_title_movie">Item %1$s - %2$s</string>
     <string name="search">Search</string>
+    <string name="item">Item</string>
 </resources>

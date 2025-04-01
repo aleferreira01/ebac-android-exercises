@@ -1,5 +1,6 @@
 package br.com.alexander.awesomemovieapp.placeholder
 
+import br.com.alexander.awesomemovieapp.R
 import java.util.ArrayList
 import java.util.HashMap
 
@@ -19,7 +20,7 @@ object PlaceholderContent {
     /**
      * A map of sample (placeholder) items, by ID.
      */
-    val ITEM_MAP: MutableMap<String, PlaceholderItem> = HashMap()
+    private val ITEM_MAP: MutableMap<String, PlaceholderItem> = HashMap()
 
     private val COUNT = 25
 
@@ -32,26 +33,28 @@ object PlaceholderContent {
 
     private fun addItem(item: PlaceholderItem) {
         ITEMS.add(item)
-        ITEM_MAP.put(item.id, item)
+        ITEM_MAP[item.id] = item
     }
 
     private fun createPlaceholderItem(position: Int): PlaceholderItem {
-        return PlaceholderItem(position.toString(), "Item " + position, makeDetails(position))
-    }
-
-    private fun makeDetails(position: Int): String {
-        val builder = StringBuilder()
-        builder.append("Details about Item: ").append(position)
-        for (i in 0..position - 1) {
-            builder.append("\nMore details information here.")
-        }
-        return builder.toString()
+        return PlaceholderItem(
+            position.toString(),
+            "Batman",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam luctus urna erat, " +
+                    "ut laoreet metus vehicula malesuada. Fusce purus sapien, co",
+            R.drawable.movie_cover
+        )
     }
 
     /**
      * A placeholder item representing a piece of content.
      */
-    data class PlaceholderItem(val id: String, val content: String, val details: String) {
-        override fun toString(): String = content
+    data class PlaceholderItem(
+        val id: String,
+        val movieNameExample: String,
+        val movieDescExample: String,
+        val coverExample: Int
+    ) {
+        //override fun toString(): String = content
     }
 }
