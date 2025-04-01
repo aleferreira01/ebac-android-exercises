@@ -2,7 +2,6 @@ package br.com.alexander.awesomemovieapp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -13,9 +12,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
-import br.com.alexander.awesomemovieapp.databinding.FragmentItemBinding
 import br.com.alexander.awesomemovieapp.databinding.FragmentItemListBinding
-import br.com.alexander.awesomemovieapp.placeholder.PlaceholderContent
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * A fragment representing a list of Items.
@@ -59,6 +57,16 @@ class MovieFragment : Fragment(), MovieItemListener {
            }
         })
 
+
+        // TODO("Implementar ações para os estados em módulos futuros")
+        viewModel.dataStateLiveData.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                DataState.LOADING -> Snackbar.make(requireView(), "show loading", Snackbar.LENGTH_SHORT).show()
+                DataState.SUCCESS -> Snackbar.make(requireView(), "Test success", Snackbar.LENGTH_SHORT).show()
+                DataState.ERROR -> Snackbar.make(requireView(), "Test error", Snackbar.LENGTH_SHORT).show()
+            }
+        });
+
     }
 
     @Deprecated("Deprecated in Java", ReplaceWith("inflater.inflate(R.menu.top_menu, menu)"))
@@ -68,6 +76,5 @@ class MovieFragment : Fragment(), MovieItemListener {
 
     override fun onItemSelected(position: Int) {
         viewModel.onMovieSelected(position, this.requireContext())
-        //findNavController().navigate(R.id.movieDetailsFragment)
     }
 }

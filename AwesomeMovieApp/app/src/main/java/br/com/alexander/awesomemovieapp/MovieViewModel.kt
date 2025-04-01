@@ -26,9 +26,16 @@ class MovieViewModel : ViewModel() {
 
     private val _navigationToMovieDetails = MutableLiveData<MovieEvent<Unit>>()
 
+    // live data para o DataState
+    val dataStateLiveData: LiveData<DataState>
+        get() = _dataStateLiveData
+
+    private val _dataStateLiveData = MutableLiveData<DataState>()
+
 
     init {
         _movieListLiveData.postValue(PlaceholderContent.ITEMS)
+        _dataStateLiveData.postValue(DataState.SUCCESS)
     }
 
     fun onMovieSelected(position: Int, context: Context) {
