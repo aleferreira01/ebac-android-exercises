@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">AwesomeMovieApp</string>
     <string name="see_more">Ver mais</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="movie_categories_example">Action • Superhero • Thriller</string>
     <string name="rating_example">★ 7.0 (IMDb)</string>
@@ -9,6 +8,10 @@
     <string name="posters">Posters</string>
     <string name="movie_title_example">Batman</string>
     <string name="temp_title_movie">Item %1$s - %2$s</string>
+    <string name="title_movie">Item %1$s - %2$s </string>
     <string name="search">Search</string>
     <string name="item">Item</string>
+    <string name="title_not_available">Título não disponível</string>
+    <string name="desc_not_available">Descrição não disponível</string>
+    <string name="error_message">Houve um erro inesperado. Tente novamente mais tarde</string>
 </resources>

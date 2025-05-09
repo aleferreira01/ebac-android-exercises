@@ -1,30 +1,25 @@
-package br.com.alexander.awesomemovieapp
+package br.com.alexander.awesomemovieapp.movieHome
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-
-import br.com.alexander.awesomemovieapp.placeholder.PlaceholderContent.PlaceholderItem
+import br.com.alexander.awesomemovieapp.data.Movie
 import br.com.alexander.awesomemovieapp.databinding.FragmentItemBinding
 
 
 interface MovieItemListener {
-    fun onItemSelected(position: Int)
+    fun onItemSelected(movieId: Int)
 }
 
 class MyMovieRecyclerViewAdapter(
     private val listener: MovieItemListener
 ) : RecyclerView.Adapter<MyMovieRecyclerViewAdapter.ViewHolder>() {
 
-    private val values: MutableList<PlaceholderItem> = ArrayList()
+    private var values: List<Movie> = ArrayList()
 
-    fun updateData(movieList: List<PlaceholderItem>) {
-        values.clear()
-        values.addAll(movieList)
+    fun updateData(movieList: List<Movie>) {
+        values = movieList
         notifyDataSetChanged()
     }
 
@@ -45,7 +40,7 @@ class MyMovieRecyclerViewAdapter(
         holder.bindItem(item)
 
         holder.seeMoreButton.setOnClickListener {
-            listener.onItemSelected(position)
+            listener.onItemSelected(item.id)
         }
 
     }
@@ -56,7 +51,7 @@ class MyMovieRecyclerViewAdapter(
         val view: View = binding.root
         val seeMoreButton = binding.seeMore
 
-        fun bindItem(item: PlaceholderItem) {
+        fun bindItem(item: Movie) {
             binding.movieItem = item
             binding.executePendingBindings()
         }
