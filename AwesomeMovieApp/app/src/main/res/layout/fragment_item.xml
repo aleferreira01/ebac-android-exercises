@@ -7,7 +7,7 @@
         <import type="androidx.core.content.ContextCompat" />
         <variable
             name="movieItem"
-            type="br.com.alexander.awesomemovieapp.placeholder.PlaceholderContent.PlaceholderItem" />
+            type="br.com.alexander.awesomemovieapp.data.Movie" />
     </data>
 
     <LinearLayout
@@ -39,7 +39,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@{@string/temp_title_movie(movieItem.id, @string/movie_title_example)}"
+                    android:text='@{movieItem.getTitleString(context)}'
                     tools:text="@string/movie_title_example"/>
 
                 <ImageView
@@ -50,7 +50,7 @@
                     app:layout_constraintBottom_toBottomOf="@+id/see_more"
                     app:layout_constraintStart_toStartOf="@id/movie_name"
                     app:layout_constraintTop_toTopOf="@id/movie_synopsis"
-                    android:src="@{ContextCompat.getDrawable(context, movieItem.coverExample)}"
+                    app:srcUrl='@{movieItem.imageUrl ?? ""}'
                     tools:srcCompat="@drawable/movie_cover" />
 
                 <TextView
@@ -60,13 +60,15 @@
                     android:layout_margin="@dimen/text_margin"
                     android:ellipsize="end"
                     android:maxLength="140"
+                    android:maxLines="4"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/cover_image"
                     app:layout_constraintTop_toBottomOf="@id/movie_name"
-                    android:text="@{movieItem.movieDescExample}"
+                    app:layout_constraintBottom_toTopOf="@id/see_more"
+                    android:text="@{movieItem.getDescription(context)}"
                     tools:text="@string/movie_desc_example" />
 
                 <com.google.android.material.button.MaterialButton
@@ -74,6 +76,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/transparent"
+                    android:textColor="@color/white"
                     android:text="@string/see_more"
                     app:cornerRadius="5dp"
                     app:layout_constraintBottom_toBottomOf="@id/share_button"

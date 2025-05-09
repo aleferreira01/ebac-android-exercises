@@ -1,9 +1,8 @@
-package br.com.alexander.awesomemovieapp
+package br.com.alexander.awesomemovieapp.movieHome
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -12,12 +11,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
+import br.com.alexander.awesomemovieapp.MovieViewModel
+import br.com.alexander.awesomemovieapp.R
 import br.com.alexander.awesomemovieapp.databinding.FragmentItemListBinding
-import com.google.android.material.snackbar.Snackbar
 
-/**
- * A fragment representing a list of Items.
- */
 class MovieFragment : Fragment(), MovieItemListener {
 
     private lateinit var adapter: MyMovieRecyclerViewAdapter
@@ -29,13 +26,17 @@ class MovieFragment : Fragment(), MovieItemListener {
     ): View {
 
         val binding = FragmentItemListBinding.inflate(inflater)
-        val view = binding.root as RecyclerView
+        val view = binding.root
+        val recyclerView = binding.list
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         setHasOptionsMenu(true)
 
         adapter = MyMovieRecyclerViewAdapter(this)
 
-        view.apply {
+        recyclerView.apply {
             this.adapter = this@MovieFragment.adapter
             this.layoutManager = LinearLayoutManager(context)
         }
@@ -47,7 +48,9 @@ class MovieFragment : Fragment(), MovieItemListener {
 
     private fun initObservers() {
         viewModel.movieListLiveData.observe(viewLifecycleOwner, Observer {
-            adapter.updateData(it)
+            it?.let {
+                adapter.updateData(it)
+            }
         })
 
         viewModel.navigationToMovieDetails.observe(viewLifecycleOwner, Observer { event ->
@@ -57,16 +60,6 @@ class MovieFragment : Fragment(), MovieItemListener {
            }
         })
 
-
-        // TODO("Implementar ações para os estados em módulos futuros")
-        viewModel.dataStateLiveData.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                DataState.LOADING -> Snackbar.make(requireView(), "show loading", Snackbar.LENGTH_SHORT).show()
-                DataState.SUCCESS -> Snackbar.make(requireView(), "Test success", Snackbar.LENGTH_SHORT).show()
-                DataState.ERROR -> Snackbar.make(requireView(), "Test error", Snackbar.LENGTH_SHORT).show()
-            }
-        });
-
     }
 
     @Deprecated("Deprecated in Java", ReplaceWith("inflater.inflate(R.menu.top_menu, menu)"))
@@ -74,7 +67,7 @@ class MovieFragment : Fragment(), MovieItemListener {
         inflater.inflate(R.menu.top_menu, menu)
     }
 
-    override fun onItemSelected(position: Int) {
-        viewModel.onMovieSelected(position, this.requireContext())
+    override fun onItemSelected(movieId: Int) {
+        viewModel.onMovieSelected(movieId)
     }
 }

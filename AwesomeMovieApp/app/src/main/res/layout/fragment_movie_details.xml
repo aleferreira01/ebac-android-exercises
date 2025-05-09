@@ -5,6 +5,7 @@
 
     <data>
         <import type="androidx.core.content.ContextCompat" />
+        <import type="android.view.View" />
         <variable
             name="viewModel"
             type="br.com.alexander.awesomemovieapp.MovieViewModel" />
@@ -14,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
-        tools:context=".MovieDetailsFragment">
+        tools:context=".movieDetails.MovieDetailsFragment">
 
         <ImageView
             android:id="@+id/movie_image"
@@ -25,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@{ContextCompat.getDrawable(context, viewModel.movieDetailsLiveData.image)}"
+            app:srcUrl='@{viewModel.movieDetailsLiveData.getImageUrl ?? ""}'
             tools:src="@drawable/movie"/>
 
         <TextView
@@ -39,7 +40,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/movie_image"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@{viewModel.movieDetailsLiveData.title}"
+            android:text="@{viewModel.movieDetailsLiveData.getTitleString(context)}"
             tools:text="@string/movie_title_example"/>
 
         <TextView
@@ -48,7 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/movie_categories_example"
+            tools:text="@string/movie_categories_example"
+            android:text="@{viewModel.movieDetailsLiveData.getGenresString()}"
             android:textColor="#979797"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -64,7 +66,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/rating_example"
+            tools:text="@string/rating_example"
+            android:text="@{viewModel.movieDetailsLiveData.getRatingString()}"
             android:textColor="#979797"
             android:textSize="12sp"
             android:textStyle="bold"
@@ -74,7 +77,7 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/movie_desc_scroll"
             android:layout_width="0dp"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_margin="16dp"
             android:fillViewport="true"
             app:layout_constraintBottom_toTopOf="@id/posters_label"
@@ -92,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:lineSpacingExtra="3sp"
-                    android:text="@{viewModel.movieDetailsLiveData.synopsis}"
+                    android:text="@{viewModel.movieDetailsLiveData.getDescription(context)}"
                     tools:text="@string/movie_desc_example"
                     android:textColor="#ddd"
                     android:textSize="14sp" />
@@ -126,7 +129,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/posters_label" />
+            app:layout_constraintTop_toBottomOf="@id/posters_label"
+            app:imageScaleType="fitCenter"
+            app:autoPlay="true"
+            app:autoPlayDelay="4000"
+            app:infiniteCarousel="true"
+            app:touchToPause="true"
+            app:autoWidthFixing="true" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
