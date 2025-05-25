@@ -20,7 +20,10 @@ data class Movie(
     }
 
     fun getTitleString(context: Context): String {
-        return title ?: context.getString(R.string.title_not_available)
+        if (title.isNullOrEmpty()) {
+            return context.getString(R.string.title_not_available)
+        }
+        return title
     }
 
     fun getImageUrl(): String {
@@ -28,6 +31,9 @@ data class Movie(
     }
 
     fun getDescription(context: Context): String {
-        return description ?: context.getString(R.string.desc_not_available)
+        if (description.isNullOrEmpty()) {
+            return context.getString(R.string.desc_not_available)
+        }
+        return description
     }
 }

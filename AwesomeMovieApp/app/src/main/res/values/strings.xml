@@ -11,7 +11,7 @@
     <string name="title_movie">Item %1$s - %2$s </string>
     <string name="search">Search</string>
     <string name="item">Item</string>
-    <string name="title_not_available">Título não disponível</string>
-    <string name="desc_not_available">Descrição não disponível</string>
-    <string name="error_message">Houve um erro inesperado. Tente novamente mais tarde</string>
+    <string name="title_not_available">Title not available</string>
+    <string name="desc_not_available">Description not available</string>
+    <string name="error_message">An unexpected error occurred. Please try again later</string>
 </resources>

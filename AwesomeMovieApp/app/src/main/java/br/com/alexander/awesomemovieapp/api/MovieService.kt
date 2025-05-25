@@ -1,9 +1,9 @@
-package br.com.alexander.awesomemovieapp.movieHome
+package br.com.alexander.awesomemovieapp.api
 
 import br.com.alexander.awesomemovieapp.data.MovieDetails
 import br.com.alexander.awesomemovieapp.data.MoviePosters
 import br.com.alexander.awesomemovieapp.data.MovieResponse
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -11,15 +11,15 @@ import retrofit2.http.Query
 interface MovieService {
 
     @GET("movie/popular")
-    fun getPopularMovies(): Call<MovieResponse>
+    suspend fun getPopularMovies(): Response<MovieResponse>
 
     @GET("movie/{movie_id}")
-    fun getMovieDetails(@Path("movie_id") movieId: Int): Call<MovieDetails>
+    suspend fun getMovieDetails(@Path("movie_id") movieId: Int): Response<MovieDetails>
 
     @GET("movie/{movie_id}/images")
-    fun getMoviePosters(
+    suspend fun getMoviePosters(
         @Path("movie_id") movieId: Int,
         @Query("include_image_language") language: String = "en"
-    ): Call<MoviePosters>
+    ): Response<MoviePosters>
 
 }

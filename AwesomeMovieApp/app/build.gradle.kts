@@ -72,4 +72,6 @@ dependencies {
     annotationProcessor(libs.glide)
     //OkHttp
     implementation(libs.okhttp)
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
 }

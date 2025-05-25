@@ -1,4 +1,4 @@
-package br.com.alexander.awesomemovieapp
+package br.com.alexander.awesomemovieapp.data
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

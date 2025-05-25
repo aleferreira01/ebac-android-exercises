@@ -11,7 +11,7 @@
     </data>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#262626"
@@ -24,7 +24,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/black"
                 android:paddingBottom="16dp">
 
@@ -61,6 +61,7 @@
                     android:ellipsize="end"
                     android:maxLength="140"
                     android:maxLines="4"
+                    android:lines="4"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:textColor="@color/white"
                     android:textSize="12sp"

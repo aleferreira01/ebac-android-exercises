@@ -4,13 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.alexander.awesomemovieapp.data.DataState
 import br.com.alexander.awesomemovieapp.data.Movie
 import br.com.alexander.awesomemovieapp.data.MovieResponse
 import br.com.alexander.awesomemovieapp.data.MovieDetails
 import br.com.alexander.awesomemovieapp.data.MoviePosters
 import br.com.alexander.awesomemovieapp.data.Poster
-import br.com.alexander.awesomemovieapp.movieHome.MovieService
+import br.com.alexander.awesomemovieapp.api.MovieService
+import br.com.alexander.awesomemovieapp.data.ApiCredentials
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -67,63 +70,45 @@ class MovieViewModel : ViewModel() {
     }
 
     private fun getMoviesData() {
-        movieService.getPopularMovies().enqueue(object: Callback<MovieResponse>{
-            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
-                if (response.isSuccessful) {
-                    _movieListLiveData.postValue(response.body()?.results)
-                    _dataStateLiveData.postValue(DataState.SUCCESS)
-                } else {
-                    _dataStateLiveData.postValue(DataState.ERROR)
-                }
-            }
+        viewModelScope.launch {
+            val response = movieService.getPopularMovies()
 
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                Log.e("MovieViewModel - getPopularMovies", "Error: ${t.message}")
+            if (response.isSuccessful) {
+                _movieListLiveData.postValue(response.body()?.results)
+                _dataStateLiveData.postValue(DataState.SUCCESS)
+            } else {
                 _dataStateLiveData.postValue(DataState.ERROR)
             }
-        })
+
+        }
     }
 
     private fun getMovieDetailsData(movieId: Int) {
-        movieService.getMovieDetails(movieId).enqueue(object: Callback<MovieDetails>{
-            override fun onResponse(
-                call: Call<MovieDetails>,
-                response: Response<MovieDetails>
-            ) {
-                if (response.isSuccessful) {
-                    _movieDetailsLiveData.postValue(response.body())
-                    getMoviePostersData(movieId)
-                } else {
-                    _dataStateLiveData.postValue(DataState.ERROR)
-                }
-            }
+        viewModelScope.launch {
+            val response = movieService.getMovieDetails(movieId)
 
-            override fun onFailure(call: Call<MovieDetails>, t: Throwable) {
-                Log.e("MovieViewModel - getMovieDetails", "Error: ${t.message}")
+            if (response.isSuccessful) {
+                _movieDetailsLiveData.postValue(response.body())
+                getMoviePostersData(movieId)
+            } else {
                 _dataStateLiveData.postValue(DataState.ERROR)
             }
-        })
+        }
     }
 
     private fun getMoviePostersData(movieId: Int) {
-        movieService.getMoviePosters(movieId).enqueue(object: Callback<MoviePosters> {
-            override fun onResponse(
-                call: Call<MoviePosters>,
-                response: Response<MoviePosters>
-            ) {
-                if (response.isSuccessful) {
-                    _moviePostersLiveData.postValue(response.body()?.posters)
-                    _navigationToMovieDetails.postValue(MovieEvent(Unit))
-                } else {
-                    _dataStateLiveData.postValue(DataState.ERROR)
-                }
-            }
 
-            override fun onFailure(call: Call<MoviePosters>, t: Throwable) {
-                Log.e("MovieViewModel - getMoviePosters", "Error: ${t.message}")
+        viewModelScope.launch {
+            val response = movieService.getMoviePosters(movieId)
+
+            if (response.isSuccessful) {
+                _moviePostersLiveData.postValue(response.body()?.posters)
+                _navigationToMovieDetails.postValue(MovieEvent(Unit))
+            } else {
                 _dataStateLiveData.postValue(DataState.ERROR)
             }
-        })
+        }
+
     }
 
 }
