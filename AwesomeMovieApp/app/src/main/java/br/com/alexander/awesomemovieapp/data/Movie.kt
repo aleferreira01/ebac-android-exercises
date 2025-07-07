@@ -1,16 +1,24 @@
 package br.com.alexander.awesomemovieapp.data
 
 import android.content.Context
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import br.com.alexander.awesomemovieapp.R
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+@Entity
 @JsonClass(generateAdapter = true)
 data class Movie(
+
+    @PrimaryKey
     val id: Int = 0,
+
     val title: String?,
+
     @Json(name = "overview")
     val description: String?,
+
     @Json(name = "poster_path")
     val imagePath: String?
 ) {

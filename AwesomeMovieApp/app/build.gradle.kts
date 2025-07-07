@@ -74,4 +74,8 @@ dependencies {
     implementation(libs.okhttp)
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
+    // Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 }
