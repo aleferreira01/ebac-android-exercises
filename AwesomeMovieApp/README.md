@@ -25,7 +25,8 @@ Aplicativo para consulta de filmes populares, exibição de detalhes e galeria d
     <img src="screenshots/movie-app-details.png" alt="Movie App - Detalhe do filme" width="300"/>
 </p>
 
-> [!TIP] Links úteis
+> [!TIP]
+> 
 > Para mais informações sobre a API utilizada, consulte a documentação oficial do TMDB:
 > [The Movie Database API](https://developers.themoviedb.org/3/getting-started/introduction)
 > 
