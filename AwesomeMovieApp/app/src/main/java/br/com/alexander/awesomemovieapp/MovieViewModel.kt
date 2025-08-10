@@ -1,18 +1,22 @@
 package br.com.alexander.awesomemovieapp
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.alexander.awesomemovieapp.data.DataState
 import br.com.alexander.awesomemovieapp.data.Movie
 import br.com.alexander.awesomemovieapp.data.MovieDetails
 import br.com.alexander.awesomemovieapp.data.Poster
 import br.com.alexander.awesomemovieapp.repository.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class MovieViewModel @Inject constructor(
+    var movieRepository: MovieRepository
+) : ViewModel() {
 
     // live data para MovieDetailsFragment
     val movieDetailsLiveData: LiveData<MovieDetails>
@@ -43,8 +47,6 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         get() = _moviePostersLiveData
 
     private val _moviePostersLiveData = MutableLiveData<List<Poster>>()
-
-    private val movieRepository = MovieRepository(application)
 
     init {
         _dataStateLiveData.postValue(DataState.LOADING)

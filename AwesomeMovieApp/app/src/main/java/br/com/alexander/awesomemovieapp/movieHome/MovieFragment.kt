@@ -1,16 +1,16 @@
 package br.com.alexander.awesomemovieapp.movieHome
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.alexander.awesomemovieapp.MovieViewModel
 import br.com.alexander.awesomemovieapp.R
 import br.com.alexander.awesomemovieapp.databinding.FragmentItemListBinding
@@ -18,7 +18,7 @@ import br.com.alexander.awesomemovieapp.databinding.FragmentItemListBinding
 class MovieFragment : Fragment(), MovieItemListener {
 
     private lateinit var adapter: MyMovieRecyclerViewAdapter
-    private val viewModel by navGraphViewModels<MovieViewModel>(R.id.nav_graph){ defaultViewModelProviderFactory }
+    private val viewModel by hiltNavGraphViewModels<MovieViewModel>(R.id.nav_graph)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
