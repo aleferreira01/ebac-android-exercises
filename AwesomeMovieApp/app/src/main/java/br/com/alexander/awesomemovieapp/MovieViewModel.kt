@@ -1,5 +1,6 @@
 package br.com.alexander.awesomemovieapp
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -49,7 +50,6 @@ class MovieViewModel @Inject constructor(
     private val _moviePostersLiveData = MutableLiveData<List<Poster>>()
 
     init {
-        _dataStateLiveData.postValue(DataState.LOADING)
         getMoviesData()
     }
 
@@ -57,7 +57,10 @@ class MovieViewModel @Inject constructor(
         getMovieDetailsData(movieId)
     }
 
-    private fun getMoviesData() {
+    @VisibleForTesting
+    fun getMoviesData() {
+        _dataStateLiveData.postValue(DataState.LOADING)
+        
         viewModelScope.launch {
             val movieListResult = movieRepository.getMovieData()
 
@@ -73,7 +76,8 @@ class MovieViewModel @Inject constructor(
         }
     }
 
-    private fun getMovieDetailsData(movieId: Int) {
+    @VisibleForTesting
+    fun getMovieDetailsData(movieId: Int) {
         viewModelScope.launch {
             val movieDetailsResult = movieRepository.getMovieDetailsData(movieId)
             movieDetailsResult.fold(
@@ -88,7 +92,8 @@ class MovieViewModel @Inject constructor(
         }
     }
 
-    private fun getMoviePostersData(movieId: Int) {
+    @VisibleForTesting
+    fun getMoviePostersData(movieId: Int) {
         viewModelScope.launch {
             val moviePostersResult = movieRepository.getMoviePostersData(movieId)
             moviePostersResult.fold(

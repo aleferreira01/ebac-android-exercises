@@ -7,10 +7,10 @@ import br.com.alexander.awesomemovieapp.datasource.MovieApiClientDataSource
 import br.com.alexander.awesomemovieapp.datasource.MovieDatabaseDataSource
 import javax.inject.Inject
 
-class MovieRepository @Inject constructor() {
-
-    @Inject lateinit var movieApiClientDataSource: MovieApiClientDataSource
-    @Inject lateinit var movieDatabaseDataSource: MovieDatabaseDataSource
+class MovieRepository @Inject constructor(
+    var movieApiClientDataSource: MovieApiClientDataSource,
+    var movieDatabaseDataSource: MovieDatabaseDataSource
+) {
 
     suspend fun getMovieData(): Result<List<Movie>?> {
         return try {
