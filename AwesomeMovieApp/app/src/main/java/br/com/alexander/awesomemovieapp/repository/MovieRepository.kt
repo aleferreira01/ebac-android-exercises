@@ -1,16 +1,16 @@
 package br.com.alexander.awesomemovieapp.repository
 
-import android.content.Context
 import br.com.alexander.awesomemovieapp.data.Movie
 import br.com.alexander.awesomemovieapp.data.MovieDetails
 import br.com.alexander.awesomemovieapp.data.Poster
 import br.com.alexander.awesomemovieapp.datasource.MovieApiClientDataSource
 import br.com.alexander.awesomemovieapp.datasource.MovieDatabaseDataSource
+import javax.inject.Inject
 
-class MovieRepository(context: Context) {
-
-    val movieApiClientDataSource = MovieApiClientDataSource()
-    val movieDatabaseDataSource = MovieDatabaseDataSource(context)
+class MovieRepository @Inject constructor(
+    var movieApiClientDataSource: MovieApiClientDataSource,
+    var movieDatabaseDataSource: MovieDatabaseDataSource
+) {
 
     suspend fun getMovieData(): Result<List<Movie>?> {
         return try {
@@ -50,7 +50,5 @@ class MovieRepository(context: Context) {
             movieDatabaseDataSource.saveMovieData(it)
         }
     }
-
-
 
 }

@@ -1,18 +1,23 @@
 package br.com.alexander.awesomemovieapp
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.alexander.awesomemovieapp.data.DataState
 import br.com.alexander.awesomemovieapp.data.Movie
 import br.com.alexander.awesomemovieapp.data.MovieDetails
 import br.com.alexander.awesomemovieapp.data.Poster
 import br.com.alexander.awesomemovieapp.repository.MovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class MovieViewModel @Inject constructor(
+    var movieRepository: MovieRepository
+) : ViewModel() {
 
     // live data para MovieDetailsFragment
     val movieDetailsLiveData: LiveData<MovieDetails>
@@ -44,10 +49,7 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _moviePostersLiveData = MutableLiveData<List<Poster>>()
 
-    private val movieRepository = MovieRepository(application)
-
     init {
-        _dataStateLiveData.postValue(DataState.LOADING)
         getMoviesData()
     }
 
@@ -55,7 +57,10 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         getMovieDetailsData(movieId)
     }
 
-    private fun getMoviesData() {
+    @VisibleForTesting
+    fun getMoviesData() {
+        _dataStateLiveData.postValue(DataState.LOADING)
+        
         viewModelScope.launch {
             val movieListResult = movieRepository.getMovieData()
 
@@ -71,7 +76,8 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun getMovieDetailsData(movieId: Int) {
+    @VisibleForTesting
+    fun getMovieDetailsData(movieId: Int) {
         viewModelScope.launch {
             val movieDetailsResult = movieRepository.getMovieDetailsData(movieId)
             movieDetailsResult.fold(
@@ -86,7 +92,8 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun getMoviePostersData(movieId: Int) {
+    @VisibleForTesting
+    fun getMoviePostersData(movieId: Int) {
         viewModelScope.launch {
             val moviePostersResult = movieRepository.getMoviePostersData(movieId)
             moviePostersResult.fold(

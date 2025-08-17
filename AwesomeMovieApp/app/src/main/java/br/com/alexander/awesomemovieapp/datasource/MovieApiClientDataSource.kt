@@ -1,24 +1,16 @@
 package br.com.alexander.awesomemovieapp.datasource
 
 import br.com.alexander.awesomemovieapp.api.MovieService
-import br.com.alexander.awesomemovieapp.data.ApiCredentials
 import br.com.alexander.awesomemovieapp.data.Movie
 import br.com.alexander.awesomemovieapp.data.MovieDetails
 import br.com.alexander.awesomemovieapp.data.Poster
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Inject
 
-class MovieApiClientDataSource : MovieDataSource {
+class MovieApiClientDataSource @Inject constructor() : MovieDataSource {
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl(ApiCredentials().baseUrl)
-        .client(ApiCredentials().okHttpClient().build())
-        .addConverterFactory(MoshiConverterFactory.create())
-        .build()
-
-    private val movieService = retrofit.create(MovieService::class.java)
+    @Inject lateinit var movieService: MovieService
 
     override suspend fun getMovieData(): Result<List<Movie>?> =
         withContext(Dispatchers.IO) {
